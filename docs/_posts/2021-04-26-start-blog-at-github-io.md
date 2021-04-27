@@ -18,7 +18,7 @@ github pages に 技術的なメモを残していこうと思います。
 
     [github.com/naotospace/naotospace.github.io](https://github.com/naotospace/naotospace.github.io)
 
-2. Jeykyllの初期設定
+2. jekyllの初期設定
 ```bash
 mkdir docs
 cd docs
@@ -69,3 +69,5 @@ ls -l
     ```
 
 5. push
+
+これだけで公開されました 🥳
