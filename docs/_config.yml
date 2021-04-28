@@ -18,19 +18,22 @@
 # You can create any custom variable you would like, and they will be accessible
 # in the templates via {{ site.myvariable }}.
 
-title: naoto's space 🪐🚀
+title: naoto's space 🪐 🚀
 email: ''
 description:
-  SET/QA/DevOpsEngineer | I'll show my knowledge and awesome experience!
+  SET/QA/DevOps | I'll show my knowledge and awesome experience!
 baseurl: "" # the subpath of your site, e.g. /blog
 url: "https://naotospace.github.io" # the base hostname & protocol for your site, e.g. http://example.com
 twitter_username: naotospace
 github_username:  naotospace
 
-# Build settings
-theme: minima
+remote_theme: jekyll/minima
 plugins:
+  - jekyll-remote-theme
   - jekyll-feed
+
+minima:
+  skin: solarized-dark
 
 # Exclude from processing.
 # The following items will not be processed, by default.
