@@ -3,13 +3,21 @@ layout: post
 title:  "Start blog at github pages"
 date:   2021-04-26 22:27:08 +0900
 categories: blog
+tags:
+  - github
+  - jekyll
+  - ruby
+  - markdown
+  - blog
 ---
 
 github pages に 技術的なメモを残していこうと思います。
 
 ## Links
+はじめに参考リンクのご紹介
 - [setting-up-a-github-pages-site-with-jekyll](https://docs.github.com/en/pages/setting-up-a-github-pages-site-with-jekyll/creating-a-github-pages-site-with-jekyll)
 - [jekyllrb-ja.github.io/resources](http://jekyllrb-ja.github.io/resources/)
+- [Jekyll 環境の構築（テーマは Gem 化された Minimal Mistakes）！](https://www.mk-mode.com/blog/2019/01/27/jekyll-with-minimal-mistakes/)
 
 
 ## Log
@@ -24,15 +32,15 @@ mkdir docs
 cd docs
 gem install bundler jekyll
 jekyll new .
-ls -l
-    total 48
-    -rw-r--r--  1 nk  staff   419 Apr 27 00:45 404.html
-    -rw-r--r--  1 nk  staff   938 Apr 27 00:19 Gemfile
-    -rw-r--r--  1 nk  staff  7561 Apr 26 23:45 Gemfile.lock
-    -rw-r--r--  1 nk  staff  1954 Apr 27 00:51 _config.yml
-    drwxr-xr-x  3 nk  staff    96 Apr 27 00:39 _posts
-    drwxr-xr-x  7 nk  staff   224 Apr 27 00:32 _site
-    -rw-r--r--  1 nk  staff   175 Apr 26 22:27 index.markdown
+ls -l1
+  404.html
+  Gemfile
+  Gemfile.lock
+  _config.yml
+  _includes
+  _posts
+  _site
+  index.markdown
 ```
 
 3. Gemfileの修正
@@ -70,4 +78,45 @@ ls -l
 
 5. push
 
-これだけで公開されました 🥳
+    これだけで公開されました 🥳
+
+6. Footerをカスタマイズ
+
+    Footerにブログ名が２つも表示されていたので修正しました。
+
+    1. `includes` ディレクトリ を追加
+    2. `includes/footer.html` を作成
+        ```html
+        <footer class="site-footer h-card">
+          <data class="u-url" href="/"></data>
+
+          <div class="wrapper">
+            <div class="footer-col-wrapper">
+              <div class="footer-col footer-col-2">
+                <ul class="social-media-list">
+                  <li>
+                    <a href="https://github.com/{{ site.github_username }}">
+                      <svg class="svg-icon"><use xlink:href="/assets/minima-social-icons.svg#github"></use></svg>
+                      <span class="username">{{ site.github_username }}</span>
+                    </a>
+                  </li>
+                  <li>
+                    <a href="https://www.twitter.com/{{ site.twitter_username }}">
+                      <svg class="svg-icon"><use xlink:href="/assets/minima-social-icons.svg#twitter"></use></svg>
+                      <span class="username">{{ site.twitter_username }}</span>
+                    </a>
+                  </li>
+                </ul>
+              </div>
+              <div class="footer-col footer-col-3">
+                  <p>SET/QA/DevOpsEngineer | I'll show my knowledge and awesome experience!</p>
+              </div>
+            </div>
+          </div>
+        </footer>
+        ```
+    3. `_config.yaml`の値を使えるように修正
+
+        `site.github_username`や`site.twitter_username` を 二重の半角波括弧で囲むと使えるようになります
+
+        [4876d6b37c8c754/docs/_includes/footer.html#L6](https://github.com/naotospace/naotospace.github.io/blob/4876d6b37c8c754/docs/_includes/footer.html#L6)
