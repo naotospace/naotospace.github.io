@@ -19,7 +19,6 @@ github pages に 技術的なメモを残していこうと思います。
 - [jekyllrb-ja.github.io/resources](http://jekyllrb-ja.github.io/resources/)
 - [Jekyll 環境の構築（テーマは Gem 化された Minimal Mistakes）！](https://www.mk-mode.com/blog/2019/01/27/jekyll-with-minimal-mistakes/)
 
-
 ## Log
 
 1. リポジトリ作成
