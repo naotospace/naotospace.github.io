@@ -1,0 +1,17 @@
+FROM ubuntu:14.04
+
+RUN apt-get update
+
+#Install Supervisor and config
+RUN apt-get install -y supervisor
+RUN touch /etc/supervisord.conf
+RUN echo '[supervisord]'  >> /etc/supervisord.conf
+RUN echo 'nodaemon=true'  >> /etc/supervisord.conf
+RUN echo '[program:myscript]' >> /etc/supervisord.conf
+RUN echo 'command=/app/myscript'   >> /etc/supervisord.conf
+RUN echo 'stdout_logfile=/app/myscript_stdout.log'   >> /etc/supervisord.conf
+
+RUN mkdir /app
+COPY myscript /app
+
+CMD /usr/bin/supervisord -c /etc/supervisord.conf
