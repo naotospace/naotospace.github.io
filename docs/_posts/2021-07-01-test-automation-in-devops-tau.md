@@ -33,7 +33,7 @@ Test Automatioin Universityの[Test Automation in DevOps](https://testautomation
 
   > 引用元： [https://testautomationu.applitools.com/course32/chapter1-img7.1.png](https://testautomationu.applitools.com/course32/chapter1-img7.1.png)
 
-  ![C Deployment sample](/assets/images/2021-06-24-test-automation-in-devops-tau/chapter1-img7.png)
+  ![C Deployment sample](/assets/images/2021-06-24-test-automation-in-devops-tau/chapter1-img7.1.png)
 
   自動でユーザまで届くので被害を抑えるためにBlue/green や Canaryリリースをするのがいい
 
