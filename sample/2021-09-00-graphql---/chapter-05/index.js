@@ -4,27 +4,48 @@ const { ApolloServer, gql } = require('apollo-server');
 // that together define the "shape" of queries that are executed against
 // your data.
 const typeDefs = gql`
+    type Photo {
+        id: ID!
+        url: String!
+        name: String!
+        desription: String
+    }
+
     type Query {
         totalPhotos: Int!
+        allPhotos: [Photo!]!
     }
 
     type Mutation {
-        postPhoto(name: String! description: String): Boolean!
+        postPhoto(name: String! description: String): Photo!
     }
 `;
 
+// 1. ユニークIDをインクリメントするための変数を定義
+var _id = 0
 var photos = []
 
 const resolvers = {
     Query: {
-        totalPhotos: () => photos.length
+        totalPhotos: () => photos.length,
+        allPhotos: () => photos
     },
-
     Mutation: {
         postPhoto(parent, args) {
-            photos.push(args)
-            return true
+
+            // 2. 新しい写真を作成し、idを生成する
+            var newPhoto = {
+                id: _id++,
+                ...args
+            }
+            photos.push(newPhoto)
+
+            // 3. 新しい写真を返す
+            return newPhoto
         }
+    },
+    Photo: {
+        url: parent => `http://yoursite.com/img/${parent.id}.jpg`
     }
 };
 
