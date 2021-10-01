@@ -4,11 +4,26 @@ const { ApolloServer, gql } = require('apollo-server');
 // that together define the "shape" of queries that are executed against
 // your data.
 const typeDefs = gql`
+    enum PhotoCategory {
+        SELFIE
+        PORTRAIT
+        ACTION
+        LANDSCAPE
+        GRAPHIC
+    }
+
     type Photo {
         id: ID!
         url: String!
         name: String!
-        desription: String
+        description: String
+        category: PhotoCategory!
+    }
+
+    input PostPhotoInput {
+        name: String!
+        category: PhotoCategory=PORTRAIT
+        description: String
     }
 
     type Query {
@@ -17,7 +32,7 @@ const typeDefs = gql`
     }
 
     type Mutation {
-        postPhoto(name: String! description: String): Photo!
+        postPhoto(input: PostPhotoInput!): Photo!
     }
 `;
 
@@ -36,7 +51,7 @@ const resolvers = {
             // 2. 新しい写真を作成し、idを生成する
             var newPhoto = {
                 id: _id++,
-                ...args
+                ...args.input
             }
             photos.push(newPhoto)
 
