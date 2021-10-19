@@ -18,6 +18,14 @@ const typeDefs = gql`
         name: String!
         description: String
         category: PhotoCategory!
+        postedBy: User!
+    }
+
+    type User {
+        githubLogin: ID!
+        name: String
+        avatar: String
+        postedPhotos: [Photo!]!
     }
 
     input PostPhotoInput {
@@ -37,8 +45,35 @@ const typeDefs = gql`
 `;
 
 // 1. ユニークIDをインクリメントするための変数を定義
-var _id = 0
-var photos = []
+// var _id = 0
+var users = [
+    { "githubLogin": "mHattrup", "name": "Mike Hattrup"},
+    { "githubLogin": "gPlake", "name": "Glen Plake"},
+    { "githubLogin": "sSchmidt", "name": "Scot Schmidt"}
+]
+var photos = [
+    {
+        "id": "1",
+        "name": "Dropping the Htert Chute",
+        "description": "The Heart chute is one of my favorite chutes",
+        "category": "ACTION",
+        "githubUser": "gPlake"
+    },
+    {
+        "id": "2",
+        "name": "B",
+        "description": "Desc B",
+        "category": "SELFIE",
+    "githubUser": "sSchmidt"
+    },
+    {
+        "id": "3",
+        "name": "C",
+        "description": "Desc C",
+        "category": "LANDSCAPE",
+        "githubUser": "sSchmidt"
+    },
+]
 
 const resolvers = {
     Query: {
@@ -60,7 +95,15 @@ const resolvers = {
         }
     },
     Photo: {
-        url: parent => `http://yoursite.com/img/${parent.id}.jpg`
+        url: parent => `http://yoursite.com/img/${parent.id}.jpg`,
+        postedBy: parent => {
+            return users.find(u => u.githubLogin === parent.githubUser)
+        }
+    },
+    User: {
+        postedPhotos: parent => {
+            return photos.filter(p => p.githubUser === parent.githubLogin)
+        }
     }
 };
 
