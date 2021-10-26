@@ -1,4 +1,5 @@
 const { ApolloServer, gql } = require('apollo-server');
+const { GraphQLScalarType } = require('graphql')
 
 // A schema is a collection of type definitions (hence "typeDefs")
 // that together define the "shape" of queries that are executed against
@@ -12,6 +13,7 @@ const typeDefs = gql`
         GRAPHIC
     }
 
+    scalar DateTime
     type Photo {
         id: ID!
         url: String!
@@ -20,6 +22,7 @@ const typeDefs = gql`
         category: PhotoCategory!
         postedBy: User!
         taggedUsers: [User!]!
+        created: DateTime!
     }
 
     type User {
@@ -38,12 +41,13 @@ const typeDefs = gql`
 
     type Query {
         totalPhotos: Int!
-        allPhotos: [Photo!]!
+        allPhotos(after: DateTime): [Photo!]!
     }
 
     type Mutation {
         postPhoto(input: PostPhotoInput!): Photo!
     }
+
 `;
 
 // 1. ユニークIDをインクリメントするための変数を定義
@@ -59,21 +63,24 @@ var photos = [
         "name": "Dropping the Htert Chute",
         "description": "The Heart chute is one of my favorite chutes",
         "category": "ACTION",
-        "githubUser": "gPlake"
+        "githubUser": "gPlake",
+        "created": "3-28-1977"
     },
     {
         "id": "2",
         "name": "B",
         "description": "Desc B",
         "category": "SELFIE",
-    "githubUser": "sSchmidt"
+        "githubUser": "sSchmidt",
+        "created": "1-2-1985"
     },
     {
         "id": "3",
         "name": "C",
         "description": "Desc C",
         "category": "LANDSCAPE",
-        "githubUser": "sSchmidt"
+        "githubUser": "sSchmidt",
+        "created": "2018-04-15T19:09:57.308Z"
     },
 ]
 
@@ -91,11 +98,12 @@ const resolvers = {
     },
     Mutation: {
         postPhoto(parent, args) {
-
             // 2. 新しい写真を作成し、idを生成する
             var newPhoto = {
                 id: _id++,
-                ...args.input
+                ...args.input,
+                // 写真投稿時に現在の日時を登録
+                created: new Date()
             }
             photos.push(newPhoto)
 
@@ -127,7 +135,15 @@ const resolvers = {
             .map(tag => tag.photoID)
             // Photo IDの配列をPhotoオブジェクトに変換する
             .map(photoID => photos.find(p => p.id === photoID))
-    }
+    },
+    // カスタムスカラーを定義（parseValue, serialize, parseLiteralを定義する）
+    DateTime: new GraphQLScalarType({
+        name: `DateTime`,
+        description: `A valid date time value.`,
+        parseValue: value => new Date(value),
+        serialize: value => new Date(value).toISOString(),
+        parseLiteral: ast => ast.value
+    })
 };
 
 // The ApolloServer constructor requires two parameters: your schema
