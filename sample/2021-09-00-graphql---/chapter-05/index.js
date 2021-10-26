@@ -1,54 +1,14 @@
-const { ApolloServer, gql } = require('apollo-server');
+const { ApolloServer } = require(`apollo-server-express`)
+const express = require(`express`)
+const expressPlayground = require(`graphql-playground-middleware-express`).default
+const { readFileSync} = require(`fs`)
+
 const { GraphQLScalarType } = require('graphql')
 
 // A schema is a collection of type definitions (hence "typeDefs")
 // that together define the "shape" of queries that are executed against
 // your data.
-const typeDefs = gql`
-    enum PhotoCategory {
-        SELFIE
-        PORTRAIT
-        ACTION
-        LANDSCAPE
-        GRAPHIC
-    }
-
-    scalar DateTime
-    type Photo {
-        id: ID!
-        url: String!
-        name: String!
-        description: String
-        category: PhotoCategory!
-        postedBy: User!
-        taggedUsers: [User!]!
-        created: DateTime!
-    }
-
-    type User {
-        githubLogin: ID!
-        name: String
-        avatar: String
-        postedPhotos: [Photo!]!
-        inPhotos: [Photo!]!
-    }
-
-    input PostPhotoInput {
-        name: String!
-        category: PhotoCategory=PORTRAIT
-        description: String
-    }
-
-    type Query {
-        totalPhotos: Int!
-        allPhotos(after: DateTime): [Photo!]!
-    }
-
-    type Mutation {
-        postPhoto(input: PostPhotoInput!): Photo!
-    }
-
-`;
+const typeDefs = readFileSync(`./typeDefs.graphql`, `UTF-8`)
 
 // 1. ユニークIDをインクリメントするための変数を定義
 // var _id = 0
@@ -146,11 +106,16 @@ const resolvers = {
     })
 };
 
-// The ApolloServer constructor requires two parameters: your schema
-// definition and your set of resolvers.
+var app = express()
+
 const server = new ApolloServer({ typeDefs, resolvers });
 
-// The `listen` method launches a web server.
-server.listen().then(({ url }) => {
-  console.log(`🚀  Server ready at ${url}`);
-});
+// Expressにミドルウェアを追加
+server.applyMiddleware({ app })
+
+app.get(`/`, (req, res) => res.end(`Welcome to the PhotoShare API`))
+app.get(`/playground`, expressPlayground({ endpoint: `graphql` }))
+
+app.listen( { port: 4000}, () =>
+    console.log(`GraphQL Server running @ http://localhost:4000${server.graphqlPath}`)
+)
