@@ -8,9 +8,6 @@ const fetch = require('node-fetch')
 
 const { GraphQLScalarType } = require('graphql')
 
-// A schema is a collection of type definitions (hence "typeDefs")
-// that together define the "shape" of queries that are executed against
-// your data.
 const typeDefs = readFileSync('./typeDefs.graphql', 'UTF-8')
 
 const requestGithubToken = credentials =>
@@ -64,6 +61,7 @@ const resolvers = {
             db.collection('users')
                 .find()
                 .toArray(),
+        me: (parent, args, { currentUser }) => currentUser,
     },
     Mutation: {
         postPhoto(parent, args) {
@@ -152,11 +150,17 @@ async function start() {
     const MONGO_DB = process.env.DB_HOST
     const client = await MongoClient.connect(MONGO_DB, { useNewUrlParser: true })
     const db = client.db()
-    // dbにつなげていないっぽい
     const context = { db }
-    console.log(db)
 
-    const server = new ApolloServer({ typeDefs, resolvers, context });
+    const server = new ApolloServer({
+        typeDefs,
+        resolvers,
+        context: async ({ req }) => {
+            const githubToken = req.headers.authorization
+            const currentUser = await db.collection('users').findOne({ githubToken })
+            return { db, currentUser }
+        }
+    });
 
     await server.start()
     // Expressにミドルウェアを追加
