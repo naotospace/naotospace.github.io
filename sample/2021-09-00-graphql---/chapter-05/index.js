@@ -64,17 +64,20 @@ const resolvers = {
         me: (parent, args, { currentUser }) => currentUser,
     },
     Mutation: {
-        postPhoto(parent, args) {
-            // 2. 新しい写真を作成し、idを生成する
-            var newPhoto = {
-                id: _id++,
+        async postPhoto(parent, args, { db, currentUser }) {
+            if (!currentUser) {
+                throw new Error('Only an authorized user can post a photo')
+            }
+
+            const newPhoto = {
                 ...args.input,
-                // 写真投稿時に現在の日時を登録
+                userID: currentUser.githubLogin,
                 created: new Date()
             }
-            photos.push(newPhoto)
 
-            // 3. 新しい写真を返す
+            const { insertedIds } = await db.collection('photos').insert(newPhoto)
+            newPhoto.id = insertedIds[0]
+
             return newPhoto
         },
         async githubAuth(parent, { code }, { db }) {
@@ -109,10 +112,10 @@ const resolvers = {
         }
     },
     Photo: {
-        url: parent => `http://yoursite.com/img/${parent.id}.jpg`,
-        postedBy: parent => {
-            return users.find(u => u.githubLogin === parent.githubUser)
-        },
+        id: parent => parent.id || parent._id,
+        url: parent => `/img/photos/${parent._id}.jpg`,
+        postedBy: (parent, args, {db}) =>
+            db.collection('users').findOne({ githubLogin: parent.userID }),
         taggedUsers: parent => tags
             // 対象の写真が関係するタグの配列を返す
             .filter(tag => tag.photoID === parent.id)
