@@ -1,6 +1,6 @@
 ---
 layout: post
-title:  ""
+title:  "Booklog : Learning GraphQL"
 date:   2021-10-28 00:00:00 +0900
 categories: blog
 tags:
