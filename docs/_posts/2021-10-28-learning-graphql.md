@@ -1,7 +1,7 @@
 ---
 layout: post
 title:  ""
-date:   2021-09-00 00:00:00 +0900
+date:   2021-10-28 00:00:00 +0900
 categories: blog
 tags:
   - API
@@ -11,6 +11,7 @@ tags:
 ---
 
 
+[O'Reilly Japan - 初めてのGraphQL](https://www.oreilly.co.jp/books/9784873118932/)の3 ~ 5章までのメモです。
 
 # 3章
 
