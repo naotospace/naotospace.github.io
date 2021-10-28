@@ -13,6 +13,10 @@ tags:
 
 [O'Reilly Japan - 初めてのGraphQL](https://www.oreilly.co.jp/books/9784873118932/)の3 ~ 5章までのメモです。
 
+実装したGraphqlサーバは[こちら](https://github.com/naotospace/naotospace.github.io/tree/main/sample/2021-10-28-learning-graphql/chapter-05)にあります。
+
+なお、[MoonHighway/learning-graphql: The code samples for Learning GraphQL by Eve Porcello and Alex Banks, published by O'Reilly Media](https://github.com/MoonHighway/learning-graphql)にもサンプルコードがあるがnpmのライブラリのバージョンが古くてうまく動かなかったので参考になるかもしれません。
+
 # 3章
 
 ## GETクエリサンプル
