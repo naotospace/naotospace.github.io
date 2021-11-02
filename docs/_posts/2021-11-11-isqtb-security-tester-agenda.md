@@ -1,6 +1,6 @@
 ---
 layout: post
-title:  "Learing Advansed security tester"
+title:  "Learing ISTQB Advansed Security Tester"
 date:   2021-11-01 00:00:00 +0900
 categories: blog
 tags:
@@ -8,12 +8,17 @@ tags:
   - devops
 ---
 
-[https://www.istqb.org/certification-path-root/advanced-security-tester.html](ISTQB Security Tester Advanced level Security Tester)のシラバスの興味のある部分を読んで見ました。
+[https://www.istqb.org/certification-path-root/advanced-security-tester.html](ISTQB Security Tester Advanced level Security Tester)
+
+のシラバスの中から興味ある部分を翻訳＋追加で調べました。
+
 # ISTQBの全体像
 
-Advanced levelはFoundation Levelの上位である。
+Advanced levelはFoundation Levelの上位にあたります。
 
-試験の難易度が高いというよりもFLの知識や技術がありきの問題である印象。
+個人的には試験の難易度が高いというよりもFLの知識や技術がありきの問題である印象です。
+
+英語が難しい。。
 
 引用元：[https://www.istqb.org/portfolio_map/images/istqb-portfolio-image.jpg](https://www.istqb.org/portfolio_map/images/istqb-portfolio-image.jpg)
 
@@ -30,6 +35,8 @@ Advanced levelはFoundation Levelの上位である。
 
 引用元： [https://www.istqb.org/downloads/send/46-advanced-level-security-tester/194-advanced-security-tester-syllabus-ga-2016.html](https://www.istqb.org/downloads/send/46-advanced-level-security-tester/194-advanced-security-tester-syllabus-ga-2016.html)
 
+目次を読み気になる部分を読みわからない語句などを調べました。
+
 ## Security Testing Purposes, Goals and Strategies - 130 mins
 - 2.1 Introduction
 - 2.2 The Purpose of Security Testing
@@ -38,6 +45,14 @@ Advanced levelはFoundation Levelの上位である。
 - 2.4.1 The Alignment of Security Testing Goals
 - 2.4.2 Identification of Security Test Objectives
 - 2.4.3 The Difference Between Information Assurance and Security Testing
+    - 情報保証(IA)とセキュリティテストの違い
+    - IAはセキュリティテストより広い範囲を意味する単語
+        - 品質保証とソフトウェアテストの関係に似ている
+    - 情報保証(Information Assurance)とは
+        - 情報保証とは、情報を保証し、情報の使用、処理、保存、および送信に関連するリスクを管理することです。情報保証には、ユーザーデータの整合性、可用性、信頼性、否認防止、および機密性の保護が含まれます。 IAには、デジタル保護だけでなく、物理的な手法も含まれます。
+        - 参考：[https://en.wikipedia.org/wiki/Information_assurance](https://en.wikipedia.org/wiki/Information_assurance)
+    - セキュリティテストとは
+        - 「システムのセキュリティ機能が設計どおりに実装されており、提案されたアプリケーション環境に適しているかどうかを判断するために使用されるプロセス」です。 [MDA1]
 - 2.5 The Scope and Coverage of Security Testing Objectives
 - 2.6 Security Testing Approaches
 - 2.6.1 Analysis of Security Test Approaches
@@ -48,11 +63,28 @@ Advanced levelはFoundation Levelの上位である。
 ## Security Testing Processes - 140 mins
 - 3.1 Security Test Process Definition
 - 3.1.1 ISTQB Security Testing Process
+    - 基本的にはソフトウェアテストのプロセスと同じ
+    - 結果の評価部分に差分あり
+        - 結果の評価とレポート - 新しい脅威をできるだけ早く報告するためにテスト実行と並行して実行されることがよくあります
 - 3.1.2 Aligning the Security Testing Process to a Particular Application Lifecycle Model
     - → 特定のアプリケーションのライフサイクルに合わせてプロセスを調整する
 - 3.2 Security Test Planning
 - 3.2.1 Security Test Planning Objectives
+    - 2つの側面にフォーカスするのが一般的
+        - 設計されたセキュリティ防御が実装され、設計どおりに機能することを確認する
+            - リスク分析に基づく
+        - アプリケーションの開発中に脆弱性が導入されていないことを確認する
+            - 品質保証のアクティビティとベストプラクティスで回避することができる
+            - 開発チームのプラクティスの評価から始める
+                - この結果に基づいて追加のセキュリティテストの導入を選択する
 - 3.2.2 Key Security Test Plan Elements
+    - 下記の質問で主要な要素を決定することができる
+    - スコープの確認する
+    - テスト実行者について確認する
+    - 通常のテストスケジュールを考慮して適切なスケジュールを確定する
+    - 実行するタスクと必要な時間を定義する
+    - セキュリティテスト環境について定義する
+    - セキュリティテスト活動のための承認と承認を取るための準備
 - 3.3 Security Test Design
 - 3.3.1 Security Test Design
 - 3.3.2 Security Test Design Based on Policies and Procedures
