@@ -1,7 +1,7 @@
 ---
 layout: post
 title:  "Learing ISTQB Advansed Security Tester"
-date:   2021-11-01 00:00:00 +0900
+date:   2021-11-15 00:00:00 +0900
 categories: blog
 tags:
   - Test automation
@@ -20,13 +20,13 @@ Advanced levelはFoundation Levelの上位にあたります。
 
 引用元：[https://www.istqb.org/portfolio_map/images/istqb-portfolio-image.jpg](https://www.istqb.org/portfolio_map/images/istqb-portfolio-image.jpg)
 
-![https://www.istqb.org/portfolio_map/images/istqb-portfolio-image.jpg](/assets/images/2021-11-00-istqb-security-tester-agenda/istqb-portfolio-image.jpeg)
+![https://www.istqb.org/portfolio_map/images/istqb-portfolio-image.jpg](/assets/images/2021-11-15-istqb-security-tester-agenda/istqb-portfolio-image.jpeg)
 
 # Security Testerのコンテンツ
 
 引用元：[https://www.istqb.org/images/security-tester-contents.png](https://www.istqb.org/images/security-tester-contents.png)
 
-![image-20211101095419237](/assets/images/2021-11-00-istqb-security-tester-agenda/security-tester-contents.png)
+![image-20211101095419237](/assets/images/2021-11-15-istqb-security-tester-agenda/security-tester-contents.png)
 
 
 # シラバスを読む
