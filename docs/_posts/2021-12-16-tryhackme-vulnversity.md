@@ -1,7 +1,7 @@
 ---
 layout: post
 title:  "TryHackMe: Vulnversity"
-date:   2021-12-06 00:00:00 +0900
+date:   2021-12-07 09:00:00 +0900
 categories: blog
 tags:
   - Security testing
@@ -11,13 +11,13 @@ tags:
   - Bup Suite
 ---
 
-TryHackMeの[Vulnversity](https://tryhackme.com/room/vulnversity) 学習ログです。
+TryHackMeの[Vulnversity Room](https://tryhackme.com/room/vulnversity) の学習ログです。
 
-TryHackMeはセキュリティ学習サービスです。手を動かしながら学べるので楽しく勉強できます。
+[TryHackMe](https://tryhackme.com/)はセキュリティ学習サービスです。手を動かしながら学べるので楽しく勉強できます。
 
 Vulnversityルームは基礎中の基礎ですが、脆弱性を含む検証用マシンに対して一つ一つコマンドやツールを実行して試しながら理解を深めることができました。
 
-本記事には **Writeupも含まれる** のでご注意ください。
+※ 本記事には **Writeupも含まれる** のでご注意ください。
 
 ## (1) Reconnaissance
 > 進行する前に、常に徹底的に偵察を行っていることを確認することが重要です。 開いているすべてのサービス（すべてが悪用される可能性がある）を知ることは非常に重要です。
