@@ -95,18 +95,18 @@ tags:
     - 拡張子を攻撃リクエスト内で切り替える設定
 
       `$` じゃないので注意。右の「Add ~」から追加する
-      ![postions](/assets/images/2021-12-00-tryhackmelog/Intruder-01-positions.png)
+      ![postions](/assets/images/2021-12-16-tryhackme-vulnversity/Intruder-01-positions.png)
     - 確認する拡張子のリストを追加
 
       ホントはもっとリストを入れる必要がある
-      ![payload](/assets/images/2021-12-00-tryhackmelog/Intruder-02-payloads.png)
+      ![payload](/assets/images/2021-12-16-tryhackme-vulnversity/Intruder-02-payloads.png)
 
     - 攻撃リクエストに対するレスポンス内をチェックする文字列を設定
-      ![options](/assets/images/2021-12-00-tryhackmelog/Intruder-03-options.png)
+      ![options](/assets/images/2021-12-16-tryhackme-vulnversity/Intruder-03-options.png)
     - Start Attack and check result
 
       `.phtml` アップロード可能なことがわかった
-      ![result](/assets/images/2021-12-00-tryhackmelog/Intruder-04-result.png)
+      ![result](/assets/images/2021-12-16-tryhackme-vulnversity/Intruder-04-result.png)
 
 - php-reverse-shell.phtmlをアップロードする
   - [php-reverse-shell/php-reverse-shell.php at master · pentestmonkey/php-reverse-shell](https://github.com/pentestmonkey/php-reverse-shell/blob/master/php-reverse-shell.php)
