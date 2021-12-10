@@ -6,6 +6,7 @@ baseurl: "" # the subpath of your site, e.g. /blog
 url: "https://naotospace.github.io" # the base hostname & protocol for your site, e.g. http://example.com
 twitter_username: naotospace
 github_username:  naotospace
+timezone: Asia/Tokyo
 
 remote_theme: jekyll/minima
 plugins:
