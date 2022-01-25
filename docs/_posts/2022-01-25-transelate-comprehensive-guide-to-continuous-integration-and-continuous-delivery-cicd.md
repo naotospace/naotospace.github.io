@@ -1,11 +1,11 @@
 ---
 layout: post
-title:  "Temp"
+title:  "Translate: Comprehensive Guide to Continuous Integration and Continuous Delivery (CICD)"
 date:   2022-01-25 00:00:00 +0900
 categories: blog
 tags:
   - english
-  - trancelate
+  - translate
   - ci
   - cd
   - blog
