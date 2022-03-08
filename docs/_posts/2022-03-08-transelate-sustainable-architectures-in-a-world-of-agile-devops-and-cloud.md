@@ -11,7 +11,7 @@ tags:
   - Sustainable architecture
   - stackoverflow
   - blog
-　- quality attributes
+  - quality attributes
 ---
 
 [Sustainable architectures in a world of Agile, DevOps, and cloud - Stack Overflow Blog](https://stackoverflow.blog/2022/02/24/sustainable-architectures-in-a-world-of-agile-devops-and-cloud/)の非公式翻訳です。
