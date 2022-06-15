@@ -1,11 +1,11 @@
-title: n's base ⛺️
+title: n base ⛺️
 email: ''
 description:
   I'm interested in test automation, QA, and DevOps. I'll show my knowledge and awesome experience!
 baseurl: "" # the subpath of your site, e.g. /blog
 url: "https://naotospace.github.io" # the base hostname & protocol for your site, e.g. http://example.com
 twitter_username: naotospace
-github_username:  naotospace
+github_username:  nk-ty
 timezone: Asia/Tokyo
 future: FALSE
 
