@@ -1,6 +1,6 @@
 ---
 layout: post
-title:  ""
+title:  "Learning ruby by the cherry book! (Chapter 2)"
 date:   2022-08-02 00:00:00 +0900
 categories: blog
 tags:
