@@ -53,6 +53,7 @@ end
 ```
 
 ## 5.5 convert_lengthの実装
+[nk-ty.github.io/sample/ruby-book at main · nk-ty/nk-ty.github.io](https://github.com/nk-ty/nk-ty.github.io/tree/main/sample/ruby-book)
 
 ### 5.6.2 **でハッシュを展開させる
 
