@@ -10,6 +10,47 @@ tags:
 
 プログラミング言語の再学習として[プロを目指す人のためのRuby入門［改訂2版］](https://gihyo.jp/book/2021/978-4-297-12437-3)を読み始めましたので、気になる点をまとめます。
 
+### 5.2.2 ハッシュの繰り返し処理
+
+```ruby
+currencies = { 'japan' => 'yen', 'us' => 'dollar', 'india' => 'ruppe' }
+currencies.each do |k, v|
+  puts "#{k}: #{v}"
+end
+
+currencies.each do |k_v|
+  puts "#{k_v[0]}: #{k_v[1]}"
+end
+
+# どちらもおなじ
+# japan: yen
+# us: dollar
+# india: ruppe
+```
+
+### 5.2.3 ハッシュの比較・要素数の取得・要素の削除
+
+```ruby
+# 比較
+a = {'x' => 1, 'y' => 2}
+b = {'x' => 1, 'y' => 2}
+# 同じ値ならtrue
+a == b #=> true
+
+c = {'y' => 2, 'x' => 1}
+# 並び順が違ってもtrue
+a == c #=> true
+
+d = {'y' => 2, 'x' => 10}
+# valueが異なるとfalse
+a == d #=> false
+
+
+# 削除
+a.delete('x') #=> 1
+a #=> {"y"=>2}
+```
+
 ### 5.3.1 シンボルと文字列の違い
 
 ```ruby
