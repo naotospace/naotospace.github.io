@@ -1,7 +1,7 @@
 ---
 layout: post
 title:  "Learning ruby by the cherry book! (Chapter 5: Hash & Symbol)"
-date:   2022-08-03 00:00:00 +0900
+date:   2022-08-05 00:00:00 +0900
 categories: blog
 tags:
   - Ruby
