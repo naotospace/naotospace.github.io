@@ -186,16 +186,18 @@ begin
   # 例外
 rescue
   # StandardErrorとそのサブクラスのみ補足
+end
+
+begin
+  # 例外
 rescue NameError
-  # NameErrorとそのサブクラスのみ補足
+  # NoMethodError はここで補足される
 rescue NoMethodError
   # ここは永遠に実行されない
 end
 
 begin
   # 例外
-rescue
-  # StandardErrorとそのサブクラスのみ補足
 rescue NoMethodError
   # これなら実行される
 rescue NameError
